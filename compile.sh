@@ -53,8 +53,12 @@ else
 
   pushd v8
 
-  export CXXFLAGS="-fPIC -Wno-format-pedantic"
-  export CFLAGS="-fPIC -Wno-format-pedantic"
+  # Need to export a few flags only on linux
+  if [ $UNAME = 'Linux' ]; then
+    export CXXFLAGS="-fPIC -Wno-format-pedantic"
+    export CFLAGS="-fPIC -Wno-format-pedantic"
+  fi
+
   make clean || true
 
   # do the build
